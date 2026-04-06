@@ -603,20 +603,28 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            padding: var(--space-md) 0;
+            padding: var(--space-md);
+            margin-bottom: 0;
             border-bottom: 1px solid var(--border-subtle);
+            border-radius: 0;
             transition: all var(--transition-fast);
             cursor: pointer;
         }
 
         .archive-item:first-child {
             border-top: 1px solid var(--border-subtle);
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+
+        .archive-item:last-child {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
         }
 
         .archive-item:hover {
-            padding-left: var(--space-sm);
+            padding-left: var(--space-md);
             background: var(--bg-elevated);
-            border-radius: 4px;
         }
 
         .archive-item__date {
@@ -686,6 +694,7 @@
             justify-content: center;
             color: var(--text-secondary);
             transition: all var(--transition-fast);
+            cursor: pointer;
         }
 
         .footer__link:hover {
@@ -775,7 +784,7 @@
     <nav class="nav" id="nav">
         <div class="container">
             <div class="nav__inner">
-                <a href="#" class="nav__logo">Ritish Writes</a>
+                <a href="#" class="nav__logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Ritish Writes</a>
                 <ul class="nav__links">
                     <li><a href="#featured" class="nav__link">Thoughts</a></li>
                     <li><a href="#about" class="nav__link">About</a></li>
@@ -798,9 +807,9 @@
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         </button>
-        <a href="#featured">Thoughts</a>
-        <a href="#about">About</a>
-        <a href="#archives">Archives</a>
+        <a href="#featured" class="mobile-link">Thoughts</a>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#archives" class="mobile-link">Archives</a>
     </div>
 
     <!-- Hero -->
@@ -1036,46 +1045,46 @@
                 <h2 class="section__title">Archives</h2>
             </div>
             <div class="archives__list">
-                <div class="archive-item reveal">
+                <a href="finding-meaning-mundane.html" class="archive-item reveal">
                     <span class="archive-item__date">Aug 2025</span>
                     <span class="archive-item__title">Finding Meaning in Mundane Moments</span>
                     <span class="archive-item__arrow">→</span>
-                </div>
-                <div class="archive-item reveal reveal-delay-1">
+                </a>
+                <a href="loneliness-self-awareness.html" class="archive-item reveal reveal-delay-1">
                     <span class="archive-item__date">Jul 2025</span>
                     <span class="archive-item__title">The Loneliness of Self-Awareness</span>
                     <span class="archive-item__arrow">→</span>
-                </div>
-                <div class="archive-item reveal reveal-delay-1">
+                </a>
+                <a href="fear-being-forgotten.html" class="archive-item reveal reveal-delay-1">
                     <span class="archive-item__date">Jun 2025</span>
                     <span class="archive-item__title">On the Fear of Being Forgotten</span>
                     <span class="archive-item__arrow">→</span>
-                </div>
-                <div class="archive-item reveal reveal-delay-2">
+                </a>
+                <a href="stopped-chasing-happiness.html" class="archive-item reveal reveal-delay-2">
                     <span class="archive-item__date">May 2025</span>
                     <span class="archive-item__title">Why I Stopped Chasing Happiness</span>
                     <span class="archive-item__arrow">→</span>
-                </div>
-                <div class="archive-item reveal reveal-delay-2">
+                </a>
+                <a href="beauty-in-broken-things.html" class="archive-item reveal reveal-delay-2">
                     <span class="archive-item__date">Apr 2025</span>
                     <span class="archive-item__title">The Beauty in Broken Things</span>
                     <span class="archive-item__arrow">→</span>
-                </div>
-                <div class="archive-item reveal reveal-delay-3">
+                </a>
+                <a href="learning-listen-yourself.html" class="archive-item reveal reveal-delay-3">
                     <span class="archive-item__date">Mar 2025</span>
                     <span class="archive-item__title">Learning to Listen to Yourself</span>
                     <span class="archive-item__arrow">→</span>
-                </div>
-                <div class="archive-item reveal reveal-delay-3">
+                </a>
+                <a href="paradox-of-choice.html" class="archive-item reveal reveal-delay-3">
                     <span class="archive-item__date">Feb 2025</span>
                     <span class="archive-item__title">The Paradox of Choice in Modern Life</span>
                     <span class="archive-item__arrow">→</span>
-                </div>
-                <div class="archive-item reveal reveal-delay-4">
+                </a>
+                <a href="stillness-not-stagnation.html" class="archive-item reveal reveal-delay-4">
                     <span class="archive-item__date">Jan 2025</span>
                     <span class="archive-item__title">Why Stillness Is Not Stagnation</span>
                     <span class="archive-item__arrow">→</span>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -1085,22 +1094,10 @@
         <div class="container">
             <p class="footer__tagline">"Thoughts deserve time."</p>
             <div class="footer__links">
-                <a href="#" class="footer__link" aria-label="Twitter">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-                    </svg>
-                </a>
-                <a href="#" class="footer__link" aria-label="Email">
+                <a href="mailto:messiritish8@gmail.com" class="footer__link" aria-label="Email">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                </a>
-                <a href="#" class="footer__link" aria-label="RSS">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 11a9 9 0 0 1 9 9"></path>
-                        <path d="M4 4a16 16 0 0 1 16 16"></path>
-                        <circle cx="5" cy="19" r="1"></circle>
                     </svg>
                 </a>
             </div>
@@ -1141,10 +1138,20 @@
                 document.body.style.overflow = '';
             });
 
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('active');
-                    document.body.style.overflow = '';
+            // Handle mobile menu link clicks
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const href = link.getAttribute('href');
+                    const target = document.querySelector(href);
+                    if (target) {
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                        setTimeout(() => {
+                            const offset = target.offsetTop - 80;
+                            window.scrollTo({ top: offset, behavior: 'smooth' });
+                        }, 100);
+                    }
                 });
             });
 
@@ -1177,18 +1184,15 @@
                 }
             });
 
-            // Smooth scroll for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
+            // Handle desktop nav link clicks
+            document.querySelectorAll('.nav__links a').forEach(link => {
+                link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const target = document.querySelector(targetId);
+                    const href = this.getAttribute('href');
+                    const target = document.querySelector(href);
                     if (target) {
-                        const offsetTop = target.offsetTop - 80;
-                        window.scrollTo({
-                            top: offsetTop,
-                            behavior: 'smooth'
-                        });
+                        const offset = target.offsetTop - 80;
+                        window.scrollTo({ top: offset, behavior: 'smooth' });
                     }
                 });
             });
