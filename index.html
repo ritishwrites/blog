@@ -714,6 +714,61 @@
             color: var(--text-secondary);
         }
 
+        /* Contact Section */
+        .contact {
+            background: var(--bg-secondary);
+        }
+
+        .contact__intro {
+            text-align: center;
+            font-family: var(--font-body);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .contact__buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: var(--space-sm) var(--space-lg);
+            color: var(--text-primary);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 50px;
+            transition: all var(--transition-medium);
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .contact-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(184, 149, 110, 0.15);
+        }
+
+        @media (max-width: 480px) {
+            .contact__buttons {
+                flex-direction: column;
+            }
+            .contact-btn {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
         /* Mobile Navigation */
         .nav__mobile-menu {
             display: none;
@@ -789,6 +844,7 @@
                     <li><a href="#featured" class="nav__link">Thoughts</a></li>
                     <li><a href="#about" class="nav__link">About</a></li>
                     <li><a href="#archives" class="nav__link">Archives</a></li>
+                    <li><a href="#contact" class="nav__link">Contact</a></li>
                 </ul>
                 <button class="nav__mobile-toggle" id="mobileToggle" aria-label="Open menu">
                     <span></span>
@@ -810,6 +866,7 @@
         <a href="#featured" class="mobile-link">Thoughts</a>
         <a href="#about" class="mobile-link">About</a>
         <a href="#archives" class="mobile-link">Archives</a>
+        <a href="#contact" class="mobile-link">Contact</a>
     </div>
 
     <!-- Hero -->
@@ -1084,6 +1141,28 @@
                     <span class="archive-item__date">Jan 2025</span>
                     <span class="archive-item__title">Why Stillness Is Not Stagnation</span>
                     <span class="archive-item__arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="section__subtitle">Let's connect</p>
+                <div class="section__divider"></div>
+                <h2 class="section__title">Write to Me</h2>
+            </div>
+            <p class="contact__intro reveal reveal-delay-1">
+                If something here resonated with you, feel free to reach out directly.
+            </p>
+            <div class="contact__buttons reveal reveal-delay-2">
+                <a href="mailto:messiritish8@gmail.com?subject=Message from Ritish Writes" class="contact-btn">
+                    Email Me
+                </a>
+                <a href="https://wa.me/919492787623" target="_blank" class="contact-btn">
+                    WhatsApp Me
                 </a>
             </div>
         </div>
