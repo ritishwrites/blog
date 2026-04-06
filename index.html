@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritish Writes — Reflections on Life</title>
+    <meta name="description" content="A personal space for deep reflections on life, society, and lived experience.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500&family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #141414;
+            --bg-elevated: #1a1a1a;
+            --text-primary: #e8e4df;
+            --text-secondary: #9a958e;
+            --accent-primary: #b8956e;
+            --accent-hover: #d4a574;
+            --border-subtle: #2a2a2a;
+            --border-accent: rgba(184, 149, 110, 0.3);
+            
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Source Serif 4', Georgia, serif;
+            --font-ui: 'Outfit', system-ui, sans-serif;
+            
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 48px;
+            --space-xl: 80px;
+            --space-2xl: 120px;
+            
+            --transition-fast: 200ms ease;
+            --transition-medium: 400ms ease;
+            --transition-slow: 600ms ease-out;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        ::selection {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-subtle);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .container--narrow {
+            max-width: 720px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: var(--space-md) 0;
+            transition: all var(--transition-medium);
+        }
+
+        .nav.scrolled {
+            background: rgba(13, 13, 13, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .nav__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav__logo {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            transition: color var(--transition-fast);
+        }
+
+        .nav__logo:hover {
+            color: var(--accent-primary);
+        }
+
+        .nav__links {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .nav__link {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-primary);
+            transition: width var(--transition-medium);
+        }
+
+        .nav__link:hover {
+            color: var(--accent-primary);
+        }
+
+        .nav__link:hover::after {
+            width: 100%;
+        }
+
+        .nav__mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-xs);
+        }
+
+        .nav__mobile-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            margin: 5px 0;
+            transition: all var(--transition-fast);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--space-2xl) var(--space-md);
+            position: relative;
+        }
+
+        .hero__content {
+            max-width: 800px;
+        }
+
+        .hero__title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+            margin-bottom: var(--space-md);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards;
+        }
+
+        .hero__tagline {
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--accent-primary);
+            margin-bottom: var(--space-lg);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards 0.3s;
+        }
+
+        .hero__intro {
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards 0.5s;
+        }
+
+        .hero__scroll {
+            position: absolute;
+            bottom: var(--space-lg);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 0.8s;
+        }
+
+        .hero__scroll-text {
+            font-family: var(--font-ui);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .hero__scroll-icon {
+            width: 20px;
+            height: 30px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .hero__scroll-icon::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: var(--accent-primary);
+            border-radius: 2px;
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.3; transform: translateX(-50%) translateY(8px); }
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        .section {
+            padding: var(--space-2xl) 0;
+        }
+
+        .section__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .section__title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 400;
+            margin-bottom: var(--space-sm);
+        }
+
+        .section__subtitle {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-primary);
+        }
+
+        .section__divider {
+            width: 60px;
+            height: 1px;
+            background: var(--accent-primary);
+            margin: var(--space-md) auto;
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all var(--transition-slow);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Featured Thoughts */
+        .featured {
+            background: var(--bg-secondary);
+        }
+
+        .featured__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        @media (max-width: 968px) {
+            .featured__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .featured__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: var(--space-lg);
+            transition: all var(--transition-medium);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-accent);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .card__meta {
+            font-family: var(--font-ui);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .card__title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            line-height: 1.3;
+            margin-bottom: var(--space-sm);
+            transition: color var(--transition-fast);
+        }
+
+        .card:hover .card__title {
+            color: var(--accent-hover);
+        }
+
+        .card__excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+            flex-grow: 1;
+        }
+
+        .card__link {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            transition: gap var(--transition-fast);
+        }
+
+        .card__link:hover {
+            gap: var(--space-sm);
+        }
+
+        .card__link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Thought of the Week */
+        .thought-week {
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thought-week__inner {
+            position: relative;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .thought-week__quote-mark {
+            font-family: var(--font-display);
+            font-size: 12rem;
+            line-height: 1;
+            color: var(--accent-primary);
+            opacity: 0.15;
+            position: absolute;
+            top: -4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .thought-week__text {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .thought-week__attribution {
+            margin-top: var(--space-lg);
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .thought-week__attribution span {
+            color: var(--accent-primary);
+        }
+
+        /* Latest Reflections */
+        .reflections__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+
+        @media (max-width: 768px) {
+            .reflections__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card--horizontal {
+            flex-direction: row;
+            gap: var(--space-md);
+        }
+
+        @media (max-width: 640px) {
+            .card--horizontal {
+                flex-direction: column;
+            }
+        }
+
+        .card--horizontal .card__content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card--horizontal .card__excerpt {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* About */
+        .about {
+            background: var(--bg-secondary);
+        }
+
+        .about__content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .about__content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        .about__label {
+            font-family: var(--font-ui);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .about__name {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: var(--space-md);
+        }
+
+        .about__text {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .about__text p {
+            margin-bottom: var(--space-md);
+        }
+
+        .about__text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about__signature {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--accent-primary);
+            margin-top: var(--space-lg);
+        }
+
+        /* Archives */
+        .archives__list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .archive-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--border-subtle);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .archive-item:first-child {
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .archive-item:hover {
+            padding-left: var(--space-sm);
+            background: var(--bg-elevated);
+            border-radius: 4px;
+        }
+
+        .archive-item__date {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+            margin-right: var(--space-md);
+        }
+
+        .archive-item__title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 400;
+            transition: color var(--transition-fast);
+        }
+
+        .archive-item:hover .archive-item__title {
+            color: var(--accent-primary);
+        }
+
+        .archive-item__arrow {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all var(--transition-fast);
+        }
+
+        .archive-item:hover .archive-item__arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-subtle);
+            padding: var(--space-xl) 0;
+            text-align: center;
+        }
+
+        .footer__tagline {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        .footer__links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer__link {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+
+        .footer__link:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .footer__link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .footer__copy {
+            font-family: var(--font-ui);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        /* Mobile Navigation */
+        .nav__mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .nav__mobile-menu.active {
+            display: flex;
+        }
+
+        .nav__mobile-menu a {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--text-primary);
+        }
+
+        .nav__mobile-close {
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-md);
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: var(--space-xs);
+        }
+
+        @media (max-width: 768px) {
+            .nav__links {
+                display: none;
+            }
+
+            .nav__mobile-toggle {
+                display: block;
+            }
+
+            .section {
+                padding: var(--space-xl) 0;
+            }
+
+            .hero {
+                padding: var(--space-xl) var(--space-md);
+            }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <div class="nav__inner">
+                <a href="#" class="nav__logo">Ritish Writes</a>
+                <ul class="nav__links">
+                    <li><a href="#featured" class="nav__link">Thoughts</a></li>
+                    <li><a href="#about" class="nav__link">About</a></li>
+                    <li><a href="#archives" class="nav__link">Archives</a></li>
+                </ul>
+                <button class="nav__mobile-toggle" id="mobileToggle" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="nav__mobile-menu" id="mobileMenu">
+        <button class="nav__mobile-close" id="mobileClose" aria-label="Close menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <a href="#featured">Thoughts</a>
+        <a href="#about">About</a>
+        <a href="#archives">Archives</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero__content">
+            <h1 class="hero__title">Ritish Writes</h1>
+            <p class="hero__tagline">Reflections on life, society, and the human experience.</p>
+            <p class="hero__intro">
+                This is where I slow down. Where the noise fades and the mind gets room to breathe. 
+                These are not opinions written for impact, but thoughts cultivated in silence — 
+                offered to those who also find meaning in looking deeper.
+            </p>
+        </div>
+        <div class="hero__scroll">
+            <span class="hero__scroll-text">Scroll</span>
+            <div class="hero__scroll-icon"></div>
+        </div>
+    </section>
+
+    <!-- Featured Thoughts -->
+    <section class="section featured" id="featured">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="section__subtitle">Featured</p>
+                <div class="section__divider"></div>
+                <h2 class="section__title">Recent Thoughts</h2>
+            </div>
+            <div class="featured__grid">
+                <article class="card reveal reveal-delay-1">
+                    <div class="card__content">
+                        <p class="card__meta">March 2026</p>
+                        <h3 class="card__title">Why Modern Life Feels Heavier Than It Looks</h3>
+                        <p class="card__excerpt">
+                            We carry invisible weights that no one sees — the expectations we internalize, 
+                            the pace we've normalized, the quiet desperation of always becoming 
+                            something instead of simply being.
+                        </p>
+                        <a href="modern-life-heavier.html" class="card__link">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+                <article class="card reveal reveal-delay-2">
+                    <div class="card__content">
+                        <p class="card__meta">February 2026</p>
+                        <h3 class="card__title">Society Rewards Noise Over Depth</h3>
+                        <p class="card__excerpt">
+                            The loudest voices get the largest platforms. The deepest thoughts often 
+                            remain unwritten because they demand too much from the reader — and the 
+                            writer. We've traded wisdom for virality.
+                        </p>
+                        <a href="society-rewards-noise.html" class="card__link">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+                <article class="card reveal reveal-delay-3">
+                    <div class="card__content">
+                        <p class="card__meta">January 2026</p>
+                        <h3 class="card__title">What Silence Taught Me About People</h3>
+                        <p class="card__excerpt">
+                            In silence, you hear what words hide. The pauses between sentences, 
+                            the spaces where honesty lives. Most people are performing constantly, 
+                            even to themselves. Stillness reveals the actor behind the mask.
+                        </p>
+                        <a href="silence-taught-me.html" class="card__link">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thought of the Week -->
+    <section class="section thought-week">
+        <div class="container container--narrow">
+            <div class="section__header reveal">
+                <p class="section__subtitle">Featured</p>
+                <div class="section__divider"></div>
+                <h2 class="section__title">Thought of the Week</h2>
+            </div>
+            <div class="thought-week__inner reveal reveal-delay-1">
+                <span class="thought-week__quote-mark">"</span>
+                <p class="thought-week__text">
+                    We spend our lives preparing to live, so consumed with the future 
+                    that we forget to notice the present slipping away — moment by moment, 
+                    into the past we can never return to.
+                </p>
+                <p class="thought-week__attribution">
+                    <span>—</span> Ritish
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Reflections -->
+    <section class="section" id="reflections">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="section__subtitle">From the notebook</p>
+                <div class="section__divider"></div>
+                <h2 class="section__title">Latest Reflections</h2>
+            </div>
+            <div class="reflections__grid">
+                <article class="card card--horizontal reveal reveal-delay-1">
+                    <div class="card__content">
+                        <p class="card__meta">December 2025</p>
+                        <h3 class="card__title">The Weight of Expectations</h3>
+                        <p class="card__excerpt">
+                            Others' expectations are heavy because they're made of invisible material — 
+                            you can't see them until they've already bent your spine. Learning to set 
+                            them down isn't weakness. It's survival.
+                        </p>
+                        <a href="weight-of-expectations.html" class="card__link">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+                <article class="card card--horizontal reveal reveal-delay-2">
+                    <div class="card__content">
+                        <p class="card__meta">November 2025</p>
+                        <h3 class="card__title">On Being Comfortable With Discomfort</h3>
+                        <p class="card__excerpt">
+                            Growth never happens in comfort. The moments that broke us apart 
+                            are the same moments that rebuilt us stronger — if we had the courage 
+                            to stay present with the pain.
+                        </p>
+                        <a href="comfortable-with-discomfort.html" class="card__link">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+                <article class="card card--horizontal reveal reveal-delay-3">
+                    <div class="card__content">
+                        <p class="card__meta">October 2025</p>
+                        <h3 class="card__title">The Art of Doing Less</h3>
+                        <p class="card__excerpt">
+                            We've been conditioned to equate busyness with worth. But the most 
+                            fulfilled people I know have mastered the counterintuitive art of 
+                            doing less — and doing it with intention.
+                        </p>
+                        <a href="art-of-doing-less.html" class="card__link">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+                <article class="card card--horizontal reveal reveal-delay-4">
+                    <div class="card__content">
+                        <p class="card__meta">September 2025</p>
+                        <h3 class="card__title">Why We Stop Asking Questions</h3>
+                        <p class="card__excerpt">
+                            Children ask 'why' hundreds of times a day. Adults stop — not because 
+                            they have answers, but because asking admits you don't. This silence 
+                            costs us more than we realize.
+                        </p>
+                        <a href="why-we-stop-asking.html" class="card__link">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="about__content">
+                <div class="reveal">
+                    <p class="about__label">About the writer</p>
+                    <h2 class="about__name">A Mind in Reflection</h2>
+                </div>
+                <div class="about__text reveal reveal-delay-1">
+                    <p>
+                        I am not an expert. I have no credentials to wave, no framework to sell. 
+                        I am simply someone who pays attention — to the way light falls through 
+                        a window at different hours, to the hesitation in someone's voice when 
+                        they're about to lie, to the strange peace that comes after crying.
+                    </p>
+                    <p>
+                        This space exists because I've learned that thoughts unrecorded are 
+                        thoughts lost. And in a world that moves too fast to think, I've found 
+                        that the act of writing itself is a form of resistance — a small, quiet 
+                        rebellion against the noise.
+                    </p>
+                    <p>
+                        Here, I write about life as I experience it: messy, uncertain, often 
+                        contradictory. I don't have answers. I have questions worth sitting 
+                        with. And if you've found your way here, perhaps we share the same hunger 
+                        — for meaning that doesn't come pre-packaged.
+                    </p>
+                    <p class="about__signature">— Ritish</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Archives -->
+    <section class="section" id="archives">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="section__subtitle">Going back</p>
+                <div class="section__divider"></div>
+                <h2 class="section__title">Archives</h2>
+            </div>
+            <div class="archives__list">
+                <div class="archive-item reveal">
+                    <span class="archive-item__date">Aug 2025</span>
+                    <span class="archive-item__title">Finding Meaning in Mundane Moments</span>
+                    <span class="archive-item__arrow">→</span>
+                </div>
+                <div class="archive-item reveal reveal-delay-1">
+                    <span class="archive-item__date">Jul 2025</span>
+                    <span class="archive-item__title">The Loneliness of Self-Awareness</span>
+                    <span class="archive-item__arrow">→</span>
+                </div>
+                <div class="archive-item reveal reveal-delay-1">
+                    <span class="archive-item__date">Jun 2025</span>
+                    <span class="archive-item__title">On the Fear of Being Forgotten</span>
+                    <span class="archive-item__arrow">→</span>
+                </div>
+                <div class="archive-item reveal reveal-delay-2">
+                    <span class="archive-item__date">May 2025</span>
+                    <span class="archive-item__title">Why I Stopped Chasing Happiness</span>
+                    <span class="archive-item__arrow">→</span>
+                </div>
+                <div class="archive-item reveal reveal-delay-2">
+                    <span class="archive-item__date">Apr 2025</span>
+                    <span class="archive-item__title">The Beauty in Broken Things</span>
+                    <span class="archive-item__arrow">→</span>
+                </div>
+                <div class="archive-item reveal reveal-delay-3">
+                    <span class="archive-item__date">Mar 2025</span>
+                    <span class="archive-item__title">Learning to Listen to Yourself</span>
+                    <span class="archive-item__arrow">→</span>
+                </div>
+                <div class="archive-item reveal reveal-delay-3">
+                    <span class="archive-item__date">Feb 2025</span>
+                    <span class="archive-item__title">The Paradox of Choice in Modern Life</span>
+                    <span class="archive-item__arrow">→</span>
+                </div>
+                <div class="archive-item reveal reveal-delay-4">
+                    <span class="archive-item__date">Jan 2025</span>
+                    <span class="archive-item__title">Why Stillness Is Not Stagnation</span>
+                    <span class="archive-item__arrow">→</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__tagline">"Thoughts deserve time."</p>
+            <div class="footer__links">
+                <a href="#" class="footer__link" aria-label="Twitter">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="footer__link" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+                <a href="#" class="footer__link" aria-label="RSS">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 11a9 9 0 0 1 9 9"></path>
+                        <path d="M4 4a16 16 0 0 1 16 16"></path>
+                        <circle cx="5" cy="19" r="1"></circle>
+                    </svg>
+                </a>
+            </div>
+            <p class="footer__copy">&copy; 2026 Ritish Writes. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = document.getElementById('nav');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileClose = document.getElementById('mobileClose');
+            const revealElements = document.querySelectorAll('.reveal');
+
+            // Navigation scroll effect
+            let lastScroll = 0;
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+                
+                lastScroll = currentScroll;
+            });
+
+            // Mobile menu
+            mobileToggle.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            mobileClose.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Reveal on scroll
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                
+                revealElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const revealPoint = 100;
+                    
+                    if (elementTop < windowHeight - revealPoint) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+
+            // Initial check
+            revealOnScroll();
+
+            // Throttled scroll listener
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        revealOnScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        const offsetTop = target.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Card hover sound effect (subtle)
+            document.querySelectorAll('.card, .archive-item').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
